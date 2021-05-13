@@ -26,6 +26,7 @@
 
 import config as cf
 from App import model
+import time as time
 import csv
 
 """
@@ -111,7 +112,19 @@ def minimumCostPaths(analyzer, initialStation):
     Calcula todos los caminos de costo minimo de initialStation a todas
     las otras estaciones del sistema
     """
-    return model.minimumCostPaths(analyzer, initialStation)
+    delta_time = -1.0
+    start_time = getTime()
+    var = model.minimumCostPaths(analyzer, initialStation)
+    stop_time = getTime()
+    delta_time = stop_time - start_time
+    return var, delta_time
+
+
+def getTime():
+    """
+    devuelve el instante tiempo de procesamiento en milisegundos
+    """
+    return float(time.perf_counter()*1000)
 
 
 def hasPath(analyzer, destStation):
